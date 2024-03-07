@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledInput = styled.input<{ hasError: boolean }>`
+export const StyledInput = styled.input<{ $hasError: boolean }>`
   width: 100%;
   min-height: 2.5rem;
   border-radius: 2rem;
@@ -10,5 +10,5 @@ export const StyledInput = styled.input<{ hasError: boolean }>`
     outline: none;
   }
 
-  border-color: ${({ hasError }) => (hasError ? "#FF5858" : "transparent")};
+  border-color: ${({ $hasError }) => ($hasError ? "#FF5858" : "transparent")};
 `;

@@ -1,10 +1,11 @@
-import { useState } from "react";
+import {  useState } from "react";
 import { CounterContainer, StyledApp } from "./App.styled";
 import { H1 } from "./App.styled";
 import MovieForm from "./components/MovieForm";
 import MovieTitle from "./components/MovieTitle";
 import { movies } from "../data/movies";
 import Counter from "./components/Counter";
+import GameOver from "./components/GameOver";
 
 const getRandomInt = (max: number, previous?: number) => {
   let random = Math.floor(Math.random() * (max + 1));
@@ -29,6 +30,7 @@ function App() {
   const [bgColor, setBgColor] = useState<string>(BG_COLORS.default);
   const [lives, setLives] = useState(3);
   const [score, setScore] = useState(0);
+  const [showGameOver, setShowGameOver] = useState(false);
 
   const triggerAnim = (color: string) => {
     setBgColor(color);
@@ -45,8 +47,12 @@ function App() {
       setScore((prev) => prev + 1);
       color = BG_COLORS.correct;
     } else {
-      if (lives === 1) resetGame();
-      else
+      if (lives === 1) {
+        setShowGameOver(true);
+        setTimeout(() => {
+          resetGame();
+        }, 2000);
+      } else
         setLives((prev) => {
           return prev - 1;
         });
@@ -59,6 +65,7 @@ function App() {
   const resetGame = () => {
     setLives(3);
     setScore(0);
+    setShowGameOver(false);
   };
 
   return (
@@ -72,6 +79,8 @@ function App() {
       <H1>Guess the movie</H1>
       <MovieTitle movieEmojis={emoji} />
       <MovieForm isCorrect={isCorrect} />
+      {lives}
+      {showGameOver && <GameOver />}
     </StyledApp>
   );
 }

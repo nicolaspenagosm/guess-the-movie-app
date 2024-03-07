@@ -20,7 +20,7 @@ export const Input: React.FC<IInputProps> = ({
       onBlur={onBlur}
       value={value}
       placeholder={placeholder}
-      hasError={hasError}
+      $hasError={hasError}
     ></StyledInput>
   );
 };
